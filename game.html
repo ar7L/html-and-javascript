@@ -1,0 +1,85 @@
+<html>
+    <body>
+        <canvas id = "can"></canvas>
+        <script>
+            var canvas = document.getElementById("can");
+            ctx = canvas.getContext("2d");
+            canvas.height  = 600;
+            canvas.width = 600;
+            canvas.style.backgroundColor = "lightgreen";
+            function rand(max , min){
+                return Math.floor(Math.random() * (max - min) + min);
+            }
+            let sqrCordX = [] , sqrCordY = [];
+
+            let BoatCord = {
+                x : 101,
+                y : 300
+            };
+            function DrawSquare(){
+                ctx.beginPath();
+                ctx.fillStyle = "Red";
+                let x = rand(0 , 100); sqrCordX.push(x);
+                let y = rand(0 , 250); sqrCordY.push(y);
+                ctx.rect(x , y, 10 , 10);
+                ctx.fill();
+            }
+            function deleteSquare(){
+                ctx.beginPath();
+                ctx.fillStyle = "lightgreen";
+                ctx.rect(sqrCordX.pop() , sqrCordY.pop() , 10 , 10);
+                ctx.fill();
+
+            }
+            function DrawRiver(){  
+                ctx.beginPath();
+                ctx.rect(100 , 0 , 400 , 600);
+                ctx.stroke();
+                ctx.fillStyle = "lightBlue";
+                ctx.fill();
+                //ctx.clsoePath();
+                ctx.beginPath();
+                ctx.moveTo(0,350);
+                ctx.lineTo(100,350);
+                ctx.stroke();
+
+            }
+            var vx = 10;
+            function DrawBoat(){
+                ctx.beginPath();
+                ctx.rect(BoatCord.x,BoatCord.y ,50 , 50);
+                ctx.fillStyle = "yellow";
+                ctx.fill();
+                //ctx.closePath();
+            }
+            DrawRiver();
+            let cnt = 0;
+            function MoveBoat(e){
+
+               // canvas.style.backgroundColor = "lightgreen";
+                DrawRiver();
+                DrawBoat();
+                if(e.keyCode == 39 && BoatCord.x < 450){
+                    BoatCord.x += vx;
+                }
+                if(e.keyCode == 37 && BoatCord.x >= 100 ){
+                    BoatCord.x -= vx;
+                }
+                if(e.keyCode == 67 && cnt < 3){
+                    cnt += 1
+                    DrawSquare();
+                }
+                if(e.keyCode == 68){
+                    cnt -= 1;
+                    deleteSquare();
+                }
+            }
+            DrawBoat();
+            window.addEventListener("keydown" , MoveBoat , false);
+            //window.addEventListener("keydown" , drawF , false);
+
+
+            
+        </script>
+    </body>
+</html>

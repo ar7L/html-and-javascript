@@ -1,0 +1,68 @@
+<html>
+    <body>
+       <canvas id = "can">
+       </canvas>
+       <script>
+            let can = document.getElementById("can");
+            let ctx = can.getContext('2d');
+            can.width = 500;
+            can.height =  500;
+            can.style.backgroundColor = "lightgreen";
+  
+            var h = [];
+            for(let i = 0 ; i <=100 ; ++i){
+                h[i] = 500 - Math.random()*250;
+            }
+            //bubble(h);
+            for(let i = 0 ; i < h.length; ++i){
+                console.log(h[i]);
+            }
+            var i = 0 , j = 0;
+            function animation(){
+                can.width = 500;
+                can.height =  500;
+                can.style.backgroundColor = "lightgreen";
+                let a = h[j];
+                let b = h[j+1];
+                if(a < b){
+                    swap(j , j + 1 , h);
+                }
+                if(i <= h.length){
+                    j += 1;
+                    if(j >= h.length-i-1){
+                        j = 0;
+                        i += 1;
+                    }
+                }else{
+                    document.querySelector(".para").innerHTML = "And We are done!!!";
+                }
+
+
+                for(let i = 0 ; i <= 100; ++i){
+                    ctx.beginPath();
+                    ctx.fillRect(i * 5, h[i],5,h[i]);
+                    ctx.stroke();
+                }
+            }
+
+
+            function bubble(x){
+                for(let i = 0 ; i < x.length; ++i){
+                    for(let j = 0 ; j < x.length; ++j){
+                        if(x[i] > x[j]){
+                            swap(i , j , x);
+                        }
+                    }
+                }
+            }
+            function swap(x , y , a){
+                let temp = a[x];
+                a[x] = a[y];
+                a[y] = temp;
+            }
+            setInterval(animation , 1);
+       </script>
+       <p class = "para"><font color = "red"></font></p>
+
+    </body>
+</html>
