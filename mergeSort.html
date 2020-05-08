@@ -1,0 +1,107 @@
+<html>
+    <body>
+        <canvas id = "can"></canvas>
+        <script>
+            let cnv = document.getElementById('can');
+            let ctx = cnv.getContext('2d');
+            cnv.height = "400";
+            cnv.width = "1000";
+            cnv.style.backgroundColor = "lightblue";
+            function rand(max , min){
+                return Math.floor(Math.random() * (max - min) + min);
+            }
+            function draw(x,  y , a , b){
+                ctx.beginPath();
+                ctx.rect(x , y , a ,b);
+                ctx.fillStyle = "green";
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            async function drawElements(n , heights){
+                //await sleep(1000);
+                cnv.height = "400";
+                cnv.width = "1000";
+                for(let i = 0 ; i < n; ++i){
+                    draw(i * 5 , 500 - heights[i], 5, heights[i]);
+                    //await sleep(1000);
+                }
+               
+
+            }
+
+            async function sort(data , L , R){
+                if(L == R){
+                    return;
+                }
+                let mid = (L + R) >> 1;
+                await sort(data, L  , mid);
+
+                await sort(data , mid + 1 , R);
+                
+                await merge(data , L , R);
+            }
+            async function merge(data , L , R){
+                drawElements(n , data);
+                await sleep(25);
+                let mid = (L + R) >> 1;
+                let i = L;
+                let j = mid + 1;
+                let k = L;
+                temp = new Array(R - L + 1);
+                while(i <= mid && j <= R){
+                    if(data[i] < data[j]){
+                        temp[k++] = data[i++];
+                    }else{
+                        temp[k++] = data[j++];
+                    }
+                }
+                while(i <= mid){
+                    temp[k++] = data[i++];
+                }
+                while(j <= R){
+                    temp[k++] = data[j++];
+                }
+                for(let a = L ; a <= R; ++a){
+                    data[a] = temp[a];
+                }
+                drawElements(n , data);
+                await sleep(25);
+                
+            }
+            let n = 200;
+            let h = new Array(n);
+            for(let i = 0 ; i < n; ++i){
+                h[i] = rand(105 , 400);
+            }
+              sort(h , 0 , h.length - 1);
+            // document.write(data)
+            function sleep(ms) {
+                return new Promise(resolve => setInterval(resolve, ms));
+            }
+            async function done(){
+                let t = 10;
+                while(t--){
+                    console.log("hello");
+                    await sleep(1000);
+                }
+            }
+        
+// async function demo() {
+//   console.log('Taking a break...');
+//   await sleep(2000);
+//   console.log('Two seconds later, showing sleep in a loop...');
+
+//   // Sleep in loop
+//   for (let i = 0; i < 5; i++) {
+//     if (i === 3)
+//       await sleep(2000);
+//     console.log(i);
+//   }
+// }
+
+// demo();
+            
+        </script>
+    </body>
+</html>
