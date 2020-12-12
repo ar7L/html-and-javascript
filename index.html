@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="eng" dir="ltr">
+<head>
+	<title>Programmers World</title>
+	<link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+	<div class="slider">
+		<div class="slides">
+			
+			<input type="radio" name="radio-btn" id="radio1">
+			<input type="radio" name="radio-btn" id="radio2">
+			<input type="radio" name="radio-btn" id="radio3">
+			<input type="radio" name="radio-btn" id="radio4">
+
+			<div class="slide first">
+				<img src="1.jpg" alt="">
+			</div>
+			<div class="slide">
+				<img src="2.png" alt="">
+			</div>
+			<div class="slide">
+				<img src="3.jpg" alt="">
+			</div>
+			<div class="slide">
+				<img src="4.jpg" alt="">
+			</div>			
+			<div class="navigation-auto">
+				<div class="auto-btn1"></div>
+				<div class="auto-btn2"></div>
+				<div class="auto-btn3"></div>
+				<div class="auto-btn4"></div>
+			</div>
+		</div>
+		<div class="navigation-manual">
+			<label for="radio1" class="manual-btn"></label>
+			<label for="radio2" class="manual-btn"></label>
+			<label for="radio3" class="manual-btn"></label>
+			<label for="radio4" class="manual-btn"></label>
+		</div>
+	</div>
+
+		<div>
+	<p id = "paragraph">In this content I would like to show you how to update an N X N matrix in constant time <br>
+		actually it also works for N x M matrix but we will try to keep it simple <br>
+		first let's consider we have an 8 x 8 matrix {intially all values are zero}<br>
+		hence our matrix looks like this <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,  1 , 2 , 3 , 4 , 5 , 6 , 7 <br>
+		&nbsp;&nbsp;0 &nbsp;&nbsp;[[0 , 0 , 0 , 0 , 0 , 0 , 0 , 0],<br>
+		&nbsp;&nbsp;1 &nbsp;&nbsp;[0 , 0 , 0 , 0 , 0 , 0 , 0 , 0],<br>
+		&nbsp;&nbsp;2 &nbsp;&nbsp;[0 , 0 , 0 , 0 , 0 , 0 , 0 , 0],<br>
+		&nbsp;&nbsp;3 &nbsp;&nbsp;[0 , 0 , 0 , 0 , 0 , 0 , 0 , 0],<br>
+		&nbsp;&nbsp;4 &nbsp;&nbsp;[0 , 0 , 0 , 0 , 0 , 0 , 0 , 0],<br>
+		&nbsp;&nbsp;5 &nbsp;&nbsp;[0 , 0 , 0 , 0 , 0 , 0 , 0 , 0],<br>
+		&nbsp;&nbsp;6 &nbsp;&nbsp;[0 , 0 , 0 , 0 , 0 , 0 , 0 , 0],<br>
+		&nbsp;&nbsp;7 &nbsp;&nbsp;[0 , 0 , 0 , 0 , 0 , 0 , 0 , 0],]<br>
+	    <br><br><br>
+	    Now let's try to update values from [3,3] to [3,6] (diagonally) with 1 , from [3,3] to [6,3] with 1, from<br>[6,3] to [6,6] with 1 and [3, 6] to [6,6] with 1 or in such a way so that out matrix looks like the following<br><br><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,  1 , 2 , 3 , 4 , 5 , 6 , 7 <br>
+		&nbsp;&nbsp;0 &nbsp;&nbsp;[[0 , 0 , 0 , 0 , 0 , 0 , 0 , 0],<br>
+		&nbsp;&nbsp;1 &nbsp;&nbsp;[0 , 0 , 0 , 0 , 0 , 0 , 0 , 0],<br>
+		&nbsp;&nbsp;2 &nbsp;&nbsp;[0 , 0 , 0 , 0 , 0 , 0 , 0 , 0],<br>
+		&nbsp;&nbsp;3 &nbsp;&nbsp;[0 , 0 , 0 , 1 , 1 , 1 , 1 , 0],<br>
+		&nbsp;&nbsp;4 &nbsp;&nbsp;[0 , 0 , 0 , 1 , 1 , 1 , 1 , 0],<br>
+		&nbsp;&nbsp;5 &nbsp;&nbsp;[0 , 0 , 0 , 1 , 1 , 1 , 1 , 0],<br>
+		&nbsp;&nbsp;6 &nbsp;&nbsp;[0 , 0 , 0 , 1 , 1 , 1 , 1 , 0],<br>
+		&nbsp;&nbsp;7 &nbsp;&nbsp;[0 , 0 , 0 , 0 , 0 , 0 , 0 , 0],]<br>
+		How will we do that??
+		Well if it were a unidimensional array, it would get easier to do, I assume that you people know how to do<br><br><br>
+		so in a unidimensional array now let's try to figure out how to do it.<br>
+		In order to resolve the problem we need to update possision [2, 2] by 1 or we will add 1 to that possision<br><br><br>
+		as we would for unidimensional array simultanuously we will update [2 , 6] by -1 or we will substract 1 to<br><br>
+		that possision similarly we will substarct 1 from possision [6 , 2] and we will add 1 to the possision [6 ,6]<br><br>
+		You have already noticed that we are adding to the diagonal possisions and substracting from the diagonal<br>
+		possisions.<br><br>
+		psuedo code for the update <br><br>
+		matrix[2][2] += 1; matrix[2][6] -= 1;<br><br>
+		matrix[6][2] -= 1; matrix[6][6] += 1;<br><br>
+
+
+	</p>
+	<p id = "myhighlighter">
+		&#35 include &lt;bits/stdc++.h&gt;<br>
+		<br>
+		int main(){<br>
+
+
+	    }
+	</p>
+</div>
+
+
+
+	<script type="text/javascript">
+		var counter = 1 ;
+		setInterval(function(){
+			document.getElementById('radio'+counter).checked = true;
+			counter++;
+			if(counter > 4)counter = 1;
+		},5000);
+		setInterval(function(){
+			window.scrollBy({
+				top : 100,
+				left: 0,
+				behavior: "smooth"
+			});
+		},10000);
+	</script>
+
+</body>
+</html>
