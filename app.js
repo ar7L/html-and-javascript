@@ -7,7 +7,7 @@ for(let rs of rstyles){
 	let classArray = [];
 	for(let i = 1; i < classes.length; ++i){
 		let props = classes[i].split('-');
-		let c,bgc,fs,cl,g = false , d = false,flex = false , block = false ,jfc;
+		let c,bgc,fs,cl,g = false , d,flex = false , block = false ,jfc,gtc;
 		if(props[0]==='c'){
 			c = props[1];
 		}
@@ -18,10 +18,15 @@ for(let rs of rstyles){
 			fs = props[1];
 		}
 		if(props[0] === 'd'){
-			d = true;
+			d = props[1];
+
 		}
 		if(props[0] === 'jfc'){
-			jfc = props[1];
+			jfc = props[1].replace('_','-');
+		}
+		if(props[0] === 'gtc'){
+			gtc = props[1];
+			console.log(gtc);
 		}
 		let id = classArray.indexOf(classes[i]);
 		if(id >= 0)continue;
@@ -32,16 +37,10 @@ for(let rs of rstyles){
 			background-color: #${bgc};
 			background-color: ${bgc};
 			font-size: ${fs};
+			display: ${d};
+			grid-template-columns: repeat(auto-fit,minmax(${gtc},1fr));
 			justify-content: ${jfc};
-
 		}`
-		if(d){
-			g = (props[1]==='g')?true: false;
-			flex = (props[1] === 'flex')?true:false;
-			createStyle.innerHTML += `.${classes[i]} {
-				display: ${g===true?'grid':(flex===true)?'flex':''};
-			}`
-		}
 	}
 }
 document.getElementsByTagName('head')[0].appendChild(createStyle);
